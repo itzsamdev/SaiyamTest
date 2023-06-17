@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(198, 79, 79, 0.9);
+            color: black;
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid white;
+            text-align: center;
+        }
+
+        form {
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            padding: 1rem;
+            /* margin: 10px */
+            font-size: 3rem;
+        }
+
+        input {
+            padding: 1rem;
+            margin: 10px;
+            border-radius: 1.2rem;
+        }
+
+        .result {
+            margin-top: 20px;
+            background-color: whitesmoke;
+            color: black;
+            font-size: 1rem;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            padding: 1rem;
+            border: none;
+            border-radius: 1.2rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        @media(max-width: 430px) {
+            .container {
+                width: 100vw;
+            }
+
+            input {
+                width: 80%;
+                margin: auto;
+            }
+
+            button {
+                margin-top: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>BMI CALCULATOR</h1>
+        <form class="form">
+            <label for="weight">Enter Weight(in kg)</label>
+            <input type="text" name="weight" id="weight">
+            <label for="height">Enter Height(in cm)</label>
+            <input type="text" name="height" id="height">
+            <button type="submit">Calculate</button>
+        </form>
+        <div class="result">5</div>
+    </div>
+    <script>
+
+        let form = document.querySelector(".form")
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            calculate();
+        })
+
+        function calculate() {
+            let weight = parseInt(document.querySelector("#weight").value)
+            let height = parseInt(document.querySelector("#height").value)
+            let result = document.querySelector(".result")
+
+            if (height === "" || isNaN(height))
+                result.innerHTML = "Provide a valid Height!";
+
+            else if (weight === "" || isNaN(weight))
+                result.innerHTML = "Provide a valid Weight!";
+
+            const bmi = (weight / ((height * height) / 10000).toFixed(2))
+
+            if (bmi < 18.6) result.innerHTML =
+                `Under Weight : <span> ${bmi}</span>`;
+
+            else if (bmi >= 18.6 && bmi < 24.9)
+                result.innerHTML =
+                    `Normal : <span> ${bmi}</span>`;
+
+            else result.innerHTML =
+                `Over Weight : <span> ${bmi}</span>`;
+        }
+
+
+    </script>
+</body>
+
+</html>
